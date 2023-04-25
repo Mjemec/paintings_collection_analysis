@@ -49,17 +49,17 @@ def getMainContent(selected_image: str) -> str:
 									<th>Standard deviation</th>
 								</tr>
 								<tr>
-									<td>Color 0</td>
+									<td>Blue</td>
 									<td>{details["color_0_mean"]}</td>
 									<td>{details["color_0_std"]}</td>
 								</tr>
 								<tr>
-									<td>Color 1</td>
+									<td>Green</td>
 									<td>{details["color_1_mean"]}</td>
 									<td>{details["color_1_std"]}</td>
 								</tr>
 								<tr>
-									<td>Color 2</td>
+									<td>Red</td>
 									<td>{details["color_2_mean"]}</td>
 									<td>{details["color_2_std"]}</td>
 								</tr>
