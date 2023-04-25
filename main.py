@@ -90,7 +90,7 @@ for i in rand_list:
 	# histogram
 	for j in range(len(hist)):
 		color = hist[j]
-		mean = np.mean(color)
+		mean = (color*np.array(range(0, 256))).sum()/color.sum()
 		std = np.std(color)
 		vector.append(mean)
 		vector.append(std)
