@@ -41,7 +41,8 @@ except:
 for e in histograms.keys():
     tmp = np.array(histograms[e])/len(histograms[e])
     tmp = tmp.mean(axis=0)
-
+    plt.clf()
+    plt.cla()
     plt.plot(tmp[0], c='r')
     plt.plot(tmp[1], c='g')
     plt.plot(tmp[2], c='b')
