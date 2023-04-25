@@ -70,7 +70,7 @@ def getMainContent(selected_image: str) -> str:
 	mainContent +=	f"""	<table>
 								<tr>
 									<th>Feature</th>
-									<th>Count</th>
+									<th>Value</th>
 								</tr>
 								<tr>
 									<td>Lines</td>
@@ -88,6 +88,9 @@ def getMainContent(selected_image: str) -> str:
 									<td>Contours</td>
 									<td>{details["contour_count"]}</td>
 								</tr>
+                                    <td>Time Period</td>
+									<td>{details["time_period"]}</td>
+                                <tr>
 							</table>
 						"""
 	mainContent +=		"</div>"

@@ -119,7 +119,9 @@ for i in rand_list:
 	img_tag["contour_count"] = contour_count
 
 	x_list.append(vector)
-	y_list.append(color_dict[label['text'][0]])
+	time_period = label['text'][0]
+	y_list.append(time_period)
+	img_tag["time_period"] = time_period
 
 	# serializing json
 	tag_json = json.dumps(img_tag, indent=4)
