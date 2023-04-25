@@ -9,6 +9,55 @@ with open('by_group.json') as f:
 
 keys = data[0]
 pload = data[1]
+lines = []
+faces = []
+people = []
+contours = []
+for e in pload:
+    lines.append(pload[e][-4])
+    faces.append(pload[e][-3])
+    people.append(pload[e][-2])
+    contours.append(pload[e][-1])
+
+for i, line in enumerate(lines):
+    plt.bar(keys[i], line)
+
+plt.xticks(rotation=90)
+plt.title('lines')
+plt.subplots_adjust(top=0.9, bottom=0.4, left=0.1, right=0.9)
+plt.savefig('time_plots/lines.png')
+plt.cla()
+plt.clf()
+
+for i, peopl in enumerate(people):
+    plt.bar(keys[i], peopl)
+
+plt.xticks(rotation=90)
+plt.title('people')
+plt.subplots_adjust(top=0.9, bottom=0.4, left=0.1, right=0.9)
+plt.savefig('time_plots/people.png')
+plt.cla()
+plt.clf()
+
+for i, cont in enumerate(contours):
+    plt.bar(keys[i], cont)
+
+plt.xticks(rotation=90)
+plt.title('contours')
+plt.subplots_adjust(top=0.9, bottom=0.4, left=0.1, right=0.9)
+plt.savefig('time_plots/contours.png')
+plt.cla()
+plt.clf()
+
+for i, line in enumerate(faces):
+    plt.bar(keys[i], line)
+
+plt.xticks(rotation=90)
+plt.title('faces')
+plt.subplots_adjust(top=0.9, bottom=0.4, left=0.1, right=0.9)
+plt.savefig('time_plots/faces.png')
+plt.cla()
+plt.clf()
 
 arr = list(pload.values())
 arr = np.array(arr)
@@ -20,6 +69,7 @@ t = pca.transform(arr)
 for index, e in enumerate(t):
     plt.scatter(e[0], e[1])
     plt.text(e[0], e[1], keys[index])
+
 plt.show()
 
 
