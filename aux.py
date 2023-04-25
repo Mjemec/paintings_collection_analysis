@@ -1,4 +1,5 @@
 import json
+import os
 import numpy as np
 
 from sklearn.decomposition import PCA
@@ -32,8 +33,11 @@ for e in data:
         histograms[e[2]].append(e[0])
     else:
         histograms[e[2]] = [e[0]]
+try:
+    os.mkdir('plots')
+except:
+    pass
 
-os.mkdir('plots')
 for e in histograms.keys():
     tmp = np.array(histograms[e])/len(histograms[e])
     tmp = tmp.mean(axis=0)
