@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- bootstap css -->
+	<link
+		rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+		integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"
+	/>
+
+	<!-- jquery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<!-- local script -->
+	<script src="client.js"></script>
+	
+    <script type="module" src="charts.js"></script>
+
+	<title>Pain(tings) analysis</title>
+
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row mb-5">
+			<h1 class="text-center py-4">X by time period</h1>
+			<div class="col-lg-6" id="leftImageContainer">
+			</div>
+			<div class="col-lg-6">
+				<h4 class="text-center">Bar chart</h4>
+        		<div style="width: 800px;"><canvas id="barChart"></canvas></div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
