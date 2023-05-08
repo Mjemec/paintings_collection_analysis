@@ -104,7 +104,7 @@ def get_contour_count(img):
 def get_pose_mjeme(image):
     def load_model():
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        model = torch.load('/Users/matijajemec/Documents/Faks/oo/paintings_collection_analysis/yolov7-w6-pose.pt', map_location=device)['model']
+        model = torch.load('yolov7-w6-pose.pt', map_location=device)['model']
         # Put in inference mode
         model.float().eval()
 
