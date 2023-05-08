@@ -76,6 +76,7 @@ os.mkdir(tag_dir)
 for i in rand_list:
 	debug('image #' + str(i))
 	image = ds.images[i].numpy()
+	filters.get_pose_mjeme(image)
 	debug('write image to file')
 	im_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 	cv2.imwrite(img_dir + "/image_" + str(i) + ".jpg", im_rgb)
