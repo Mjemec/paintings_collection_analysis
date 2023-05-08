@@ -26,12 +26,12 @@ function getData() {
 
 function showImages(timePeriodId) {
 	
-	let leftImageContainer = document.getElementById("leftImageContainer");
+	let centerImage = document.getElementById("centerImage");
 	console.log("show images of time period with id: " + timePeriodId);
-	console.log(leftImageContainer);
+	console.log(centerImage);
 
 	// remove any existing images
-	leftImageContainer.replaceChildren([]);
+	centerImage.replaceChildren([]);
 
 	// create image and fill bootstrap column
 	let newChild = document.createElement("img");
@@ -41,6 +41,6 @@ function showImages(timePeriodId) {
 	// get image source from server
 	newChild.setAttribute("src", serverUrl + "/time_period_examples/faces/baroque");
 
-	leftImageContainer.appendChild(newChild);
+	centerImage.appendChild(newChild);
 
 }

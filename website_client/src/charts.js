@@ -24,6 +24,8 @@ import { getRelativePosition } from 'chart.js/helpers';
             ]
           },
           options: {
+            maintainAspectRatio: false,
+            indexAxis: 'y',
             onClick: (e) => {
                 const canvasPosition = getRelativePosition(e, chart);
     
