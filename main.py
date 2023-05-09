@@ -76,10 +76,11 @@ os.mkdir(tag_dir)
 for i in rand_list:
 	debug('image #' + str(i))
 	image = ds.images[i].numpy()
-	filters.get_pose_mjeme(image)
 	debug('write image to file')
 	im_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-	cv2.imwrite(img_dir + "/image_" + str(i) + ".jpg", im_rgb)
+	poses, cnt = filters.get_pose_mjeme(im_rgb)
+	cv2.imwrite(img_dir + "/image_" + str(i) + "pose.png", poses)
+	cv2.imwrite(img_dir + "/image_" + str(i) + ".png", im_rgb)
 
 	debug('label')
 	label = ds.labels[i].data()
@@ -111,9 +112,8 @@ for i in rand_list:
 	img_tag["face_count"] = face_count
 
 	# people count
-	people_count, certainty = filters.get_people_count(image)
-	vector.append(people_count)
-	img_tag["people_count"] = people_count
+	vector.append(cnt)
+	img_tag["people_count"] = cnt
 
 	# contour count
 	contour_count = filters.get_contour_count(image)
