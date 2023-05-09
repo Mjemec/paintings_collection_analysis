@@ -79,7 +79,7 @@ for i in rand_list:
 	debug('write image to file')
 	im_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 	poses, cnt = filters.get_pose_mjeme(im_rgb)
-	cv2.imwrite(img_dir + "/image_" + str(i) + "pose.png", poses)
+	cv2.imwrite(img_dir + "/image_" + str(i) + "_pose.png", poses)
 	cv2.imwrite(img_dir + "/image_" + str(i) + ".png", im_rgb)
 
 	debug('label')
