@@ -19,8 +19,10 @@ app.get('/chart/faces', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
 
   let data = []
+  console.log(byGroupValues)
   timePeriods.forEach((timePeriod) => {
-    data.push({ time_period: timePeriod, value: byGroupValues[timePeriod][indexFaces] });
+    if (byGroupValues[timePeriod] != null)
+      data.push({ time_period: timePeriod, value: byGroupValues[timePeriod][indexFaces] });
   });
 
   res.end(JSON.stringify(data));
