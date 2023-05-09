@@ -42,12 +42,17 @@ app.get("/img_collection/:time_period/:id", (req, res) => {
 
   fs.readdir(path, (err, files) => {
 
-    files.sort();
-    fileName = files[id % files.length];
-    // dimensions = sizeOf(path + "/" + fileName);
-    // console.log(dimensions);
-    // console.log(fileName);
-    res.sendFile(fileName, { root: path });
+    if (files == null)
+      res.end();
+    else {
+      files.sort();
+      fileName = files[id % files.length];
+      // dimensions = sizeOf(path + "/" + fileName);
+      // console.log(dimensions);
+      // console.log(fileName);
+      res.sendFile(fileName, { root: path });
+    }
+
 
   });
 
