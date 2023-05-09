@@ -26,7 +26,7 @@ if not os.path.exists('yolov3.cfg'):
 debug('load')
 ds = deeplake.load('hub://activeloop/wiki-art')
 i = 0
-NUMBER_OF_INSTANCES = 20
+NUMBER_OF_INSTANCES = 500
 debug("randomlist")
 rand_list = random.sample(range(0, len(ds.images)), NUMBER_OF_INSTANCES)
 x_list = list()
@@ -35,7 +35,7 @@ y_list = list()
 times = ["early_renaissance", "high_renaissance", "mannerism_late_renaissance", "northern_renaissance", "baroque",
          "ukiyo_e", "rococo", "realism", "impressionism", "romanticism", "symbolism", "pointillism",
          "art_nouveau_modern", "naive_art_primitivism", "post_impressionism", "fauvism", "cubism", "analytical_cubism",
-         "expressionism", "synthetic_cubism", "synthetic_cubism", "expressionism", "color_field_painting",
+         "expressionism", "synthetic_cubism", "expressionism", "color_field_painting",
          "abstract_expressionism", "action_painting", "pop_art", "contemporary_realism", "new_realism", "minimalism"]
 
 colors_by_time = ['#FFDAB9', '#FFE4C4', '#FFC0CB', '#DA70D6', '#8B0000', '#800080', '#FFA07A', '#87CEFA', '#3CB371',
@@ -131,7 +131,7 @@ if do_json:
         if len(tmp):
             by_group_new[e] = list(h.mean(axis=0))
 
-    with open('by_group_new.json', 'w+') as f:
+    with open('by_group.json', 'w+') as f:
         data = json.dumps([times, by_group_new], indent=4)
         f.write(data)
 

@@ -22,6 +22,8 @@ for e in pload:
 for i, line in enumerate(lines):
     plt.bar(keys[i], line)
 
+os.makedirs('time_plots', exist_ok=True)
+
 plt.xticks(rotation=90)
 plt.title('lines')
 plt.subplots_adjust(top=0.9, bottom=0.4, left=0.1, right=0.9)
