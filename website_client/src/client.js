@@ -3,6 +3,7 @@
 /// <reference path="../node_modules/@types/jquery/index.d.ts" />
 
 const serverUrl = "http://localhost:3000";
+const imgCount = 6;
 
 window.onload = () => {
 	
@@ -20,27 +21,29 @@ function getFaceData() {
 	return $.get(serverUrl + "/chart/faces");
 };
 
-function getData() {
-	return $.get(serverUrl + "/chart/sample");
-};
-
-function showImages(timePeriodId) {
+function showImages(timePeriodStr) {
 	
-	let centerImage = document.getElementById("centerImage");
-	console.log("show images of time period with id: " + timePeriodId);
-	console.log(centerImage);
+	console.log("clicked " + timePeriodStr);
+	list_a = [];
+	for (let i = 0; i < imgCount; i++) {
+		list_a.push(document.getElementById("a-" + i));
+	}
+	console.log(list_a);
 
-	// remove any existing images
-	centerImage.replaceChildren([]);
-
-	// create image and fill bootstrap column
-	let newChild = document.createElement("img");
-	newChild.style.maxHeight = "100%";
-	newChild.style.maxWidth = "100%";
-
-	// get image source from server
-	newChild.setAttribute("src", serverUrl + "/time_period_examples/faces/baroque");
-
-	centerImage.appendChild(newChild);
+	let i = 0;
+	list_a.forEach(a => {
+		a.setAttribute("href", serverUrl + "/img_collection/" + timePeriodStr + "/" + i);
+		console.log(a.children);
+		let img;
+		for (const child of a.children) {
+			if (child.tagName == "IMG")
+				img = child;
+		}
+		console.log(img);
+		img.src = serverUrl + "/img_collection/" + timePeriodStr + "/" + i;
+		i++;
+	});
 
 }
+
+

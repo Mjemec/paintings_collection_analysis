@@ -5,6 +5,36 @@
 import Chart from 'chart.js/auto'
 import { getRelativePosition } from 'chart.js/helpers';
 
+const id2time_peroid = [
+  "realism",
+  "early_renaissance",
+  "baroque",
+  "symbolism",
+  "high_renaissance",
+  "romanticism",
+  "impressionism",
+  "color_field_painting",
+  "post_impressionism",
+  "expressionism",
+  "northern_renaissance",
+  "naive_art_primitivism",
+  "art_nouveau_modern",
+  "cubism",
+  "rococo",
+  "minimalism",
+  "pointillism",
+  "analytical_cubism",
+  "abstract_expressionism",
+  "mannerism_late_renaissance",
+  "contemporary_realism",
+  "ukiyo_e",
+  "pop_art",
+  "fauvism",
+  "action_painting",
+  "new_realism",
+  "synthetic_cubism"
+];
+
 (async function() {
 
   let promise = getFaceData();
@@ -32,9 +62,9 @@ import { getRelativePosition } from 'chart.js/helpers';
                 // Substitute the appropriate scale IDs
                 const dataX = chart.scales.x.getValueForPixel(canvasPosition.x);
                 const dataY = chart.scales.y.getValueForPixel(canvasPosition.y);
-                console.log("Clicked column: " + dataX);
                 // console.log(dataY);
-                showImages(dataX);
+                console.log("Clicked column: " + dataY);
+                showImages(id2time_peroid[dataY]);
 
             }
           }

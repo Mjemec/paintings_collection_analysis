@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require("cors");
 const app = express();
 const fs = require('fs');
+const sizeOf = require('image-size');
 
 // configure CORS
 app.use(cors({origin: "*"}));
@@ -11,24 +12,7 @@ let timePeriods = byGroup[0];
 let byGroupValues = byGroup[1];
 const indexFaces = 7;
 
-const time_period_examples_dir = "../time_period_examples";
-
-app.get('/chart/sample', (req, res) => {
-  
-  const data = [
-    { year: 2010, count: 10 },
-    { year: 2011, count: 20 },
-    { year: 2012, count: 15 },
-    { year: 2013, count: 25 },
-    { year: 2014, count: 22 },
-    { year: 2015, count: 30 },
-    { year: 2016, count: 28 },
-  ];
-
-  res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify(data));
-
-});
+const img_collection_dir = "../imgCollection";
 
 app.get('/chart/faces', (req, res) => {
 
@@ -44,24 +28,27 @@ app.get('/chart/faces', (req, res) => {
 });
 
 
-app.get("/time_period_examples/:category/:time_period", (req, res) => {
+app.get("/img_collection/:time_period/:id", (req, res) => {
 
-  let category = req.params.category;
   let time_period = req.params.time_period;
-  console.log(category);
   console.log(time_period);
+  let id = req.params.id;
+  console.log(id);
 
   res.setHeader('Content-Type', 'image/jpg');
-  path = time_period_examples_dir + "/" + category + "/" + time_period;
-  console.log(path);
+  path = img_collection_dir + "/" + time_period;
+  // console.log(path);
 
-  let fileName = "";
-  fs.readdirSync(path).forEach(file => {
-    fileName = file;
+  fs.readdir(path, (err, files) => {
+
+    files.sort();
+    fileName = files[id % files.length];
+    // dimensions = sizeOf(path + "/" + fileName);
+    // console.log(dimensions);
+    // console.log(fileName);
+    res.sendFile(fileName, { root: path });
+
   });
-
-  console.log(fileName);
-  res.sendFile(fileName, { root: path });
 
 });
 
