@@ -8,7 +8,7 @@ const sizeOf = require('image-size');
 app.use(cors({origin: "*"}));
 
 let byGroup = require('../by_group.json');
-let timePeriods = byGroup[0];
+let timePeriods = [...new Set(byGroup[0])];
 let byGroupValues = byGroup[1];
 const indexFaces = 7;
 
@@ -19,7 +19,6 @@ app.get('/chart/faces', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
 
   let data = []
-  console.log(byGroupValues)
   timePeriods.forEach((timePeriod) => {
     if (byGroupValues[timePeriod] != null)
       data.push({ time_period: timePeriod, value: byGroupValues[timePeriod][indexFaces] });
