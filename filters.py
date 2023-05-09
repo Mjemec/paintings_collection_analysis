@@ -9,11 +9,16 @@ import poseEstimate
 
 import cv2
 import numpy as np
+from ultralyticsplus import YOLO, render_result
 
 from matplotlib import pyplot as plt
 
 def get_face_count(image):
-    return poseEstimate.run(poseweights='yolov8n-face.pt', image_frame=image)
+    face_cascade = cv2.CascadeClassifier(
+        cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    gray_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray_img, scaleFactor=1.1, minNeighbors=5)
+    return None, len(faces)
 
 
 def get_histogram(image, flat=True):

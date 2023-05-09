@@ -61,8 +61,8 @@ def run(poseweights="yolov7-w6-pose.pt",source="football.png",device='cpu',view_
 
     im0 = cv2.cvtColor(im0, cv2.COLOR_RGB2BGR) #reshape image format to (BGR)
     gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
-    if 'yolov8' in poseweights:
-        return None, len(output_data)
+
+    count = 0
     for i, pose in enumerate(output_data):  # detections per image
 
         if len(output_data):  #check if no pose
@@ -73,12 +73,13 @@ def run(poseweights="yolov7-w6-pose.pt",source="football.png",device='cpu',view_
             for det_index, (*xyxy, conf, cls) in enumerate(reversed(pose[:,:6])): #loop over poses for drawing on frame
                 c = int(cls)  # integer class
                 kpts = pose[det_index, 6:]
+                count += 1
                 label = None  # if opt.hide_labels else (names[c] if opt.hide_conf else f'{names[c]} {conf:.2f}')
                 plot_one_box_kpt(xyxy, im0, label=label, color=colors(c, True),
                             line_thickness=3,kpt_label=True, kpts=kpts, steps=3,
                             orig_shape=im0.shape[:2])
 
-    return im0, len(output_data)
+    return im0, count
 
 
 def parse_opt():
