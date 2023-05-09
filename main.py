@@ -26,7 +26,7 @@ if not os.path.exists('yolov3.cfg'):
 debug('load')
 ds = deeplake.load('hub://activeloop/wiki-art')
 i = 0
-NUMBER_OF_INSTANCES = 100
+NUMBER_OF_INSTANCES = 20
 debug("randomlist")
 rand_list = random.sample(range(0, len(ds.images)), NUMBER_OF_INSTANCES)
 colors = {}
