@@ -12,47 +12,8 @@ import numpy as np
 
 from matplotlib import pyplot as plt
 
-def get_face_count(img):
-    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-    gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray_img, scaleFactor=1.1, minNeighbors=5)
-    return len(faces)
-
-def get_people_count(img):
-    # Load pre-trained YOLOv3 model for object detection
-    net = cv2.dnn.readNetFromDarknet('yolov3.cfg', 'yolov3.weights')
-
-    # Get names of output layers
-    layer_names = net.getLayerNames()
-    output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
-
-    # Load image and convert to blob format
-    img_blob = cv2.dnn.blobFromImage(img, scalefactor=1 / 255, size=(416, 416), swapRB=True, crop=False)
-
-    # Set input for YOLOv3 network
-    net.setInput(img_blob)
-
-    # Run forward pass through YOLOv3 network
-    detections = net.forward(output_layers)
-
-    # Initialize counters for people and confidence scores
-    num_people = 0
-    confidences = []
-
-    # Loop over detected objects and count people
-    for detection in detections:
-        for detected_object in detection:
-            scores = detected_object[5:]
-            class_id = np.argmax(scores)
-
-            if class_id == 0:  # Class ID 0 is for people
-                confidence = scores[class_id]
-                if confidence > 0.5:  # Set threshold for confidence score
-                    num_people += 1
-                    confidences.append(float(confidence))
-
-    # Return number of people and average confidence score
-    return num_people, np.mean(confidences)
+def get_face_count(image):
+    return poseEstimate.run(poseweights='yolov8n-face.pt', image_frame=image)
 
 
 def get_histogram(image, flat=True):
@@ -103,31 +64,3 @@ def get_contour_count(img):
 def get_pose_mjeme(image):
     return poseEstimate.run(image_frame=image)
 
-"""
-def get_pose_edges(img1):
-    model = hub.load('https://tfhub.dev/google/movenet/multipose/lightning/1')
-    movenet = model.signatures['serving_default']
-
-    # Resize image
-    img = img1.copy()
-    img = tf.image.resize_with_pad(tf.expand_dims(img, axis=0), 384,640)
-    input_img = tf.cast(img, dtype=tf.int32)
-
-    # Detection section
-    results = movenet(input_img)
-    keypoints_with_scores = results['output_0'].numpy()[:,:,:51].reshape((6,17,3))
-
-    # Render keypoints
-    loop_through_people(img1, keypoints_with_scores, EDGES, 0.1)
-
-    cv2.imshow('Movenet Multipose', img1)
-
-    if cv2.waitKey(10) & 0xFF==ord('q'):
-        break
-
-# Function to loop through each person detected and render
-def loop_through_people(frame, keypoints_with_scores, edges, confidence_threshold):
-    for person in keypoints_with_scores:
-        draw_connections(frame, person, edges, confidence_threshold)
-        draw_keypoints(frame, person, confidence_threshold)
-"""

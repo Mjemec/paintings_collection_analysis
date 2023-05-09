@@ -26,7 +26,7 @@ if not os.path.exists('yolov3.cfg'):
 debug('load')
 ds = deeplake.load('hub://activeloop/wiki-art')
 i = 0
-NUMBER_OF_INSTANCES = 20
+NUMBER_OF_INSTANCES = 100
 debug("randomlist")
 rand_list = random.sample(range(0, len(ds.images)), NUMBER_OF_INSTANCES)
 colors = {}
@@ -79,7 +79,7 @@ for i in rand_list:
 	debug('write image to file')
 	im_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 	poses, cnt = filters.get_pose_mjeme(im_rgb)
-	cv2.imwrite(img_dir + "/image_" + str(i) + "pose.png", poses)
+	cv2.imwrite(img_dir + "/image_" + str(i) + "_pose.png", poses)
 	cv2.imwrite(img_dir + "/image_" + str(i) + ".png", im_rgb)
 
 	debug('label')
@@ -107,7 +107,7 @@ for i in rand_list:
 	img_tag["line_count"] = line_count
 
 	# face count
-	face_count = filters.get_face_count(image)
+	face, face_count = filters.get_face_count(im_rgb)
 	vector.append(face_count)
 	img_tag["face_count"] = face_count
 

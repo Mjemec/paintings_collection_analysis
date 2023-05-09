@@ -46,11 +46,12 @@ def run(poseweights="yolov7-w6-pose.pt",source="football.png",device='cpu',view_
     with torch.no_grad():  #get predictions
         output_data, _ = model(image)
 
+    nkpt = model.yaml['nkpt'] if 'nkpt' in model.yaml.keys() else model.yaml['kpt_shape'][0] * model.yaml['kpt_shape'][1]
     output_data = non_max_suppression_kpt(output_data,   #Apply non max suppression
                                 0.25,   # Conf. Threshold.
                                 0.65, # IoU Threshold.
                                 nc=model.yaml['nc'], # Number of classes.
-                                nkpt=model.yaml['nkpt'], # Number of keypoints.
+                                nkpt=nkpt, # Number of keypoints.
                                 kpt_label=True)
 
     output = output_to_keypoint(output_data)
@@ -60,7 +61,8 @@ def run(poseweights="yolov7-w6-pose.pt",source="football.png",device='cpu',view_
 
     im0 = cv2.cvtColor(im0, cv2.COLOR_RGB2BGR) #reshape image format to (BGR)
     gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
-
+    if 'yolov8' in poseweights:
+        return None, len(output_data)
     for i, pose in enumerate(output_data):  # detections per image
 
         if len(output_data):  #check if no pose
