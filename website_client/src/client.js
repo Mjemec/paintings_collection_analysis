@@ -28,18 +28,16 @@ function showImages(timePeriodStr) {
 	for (let i = 0; i < imgCount; i++) {
 		list_a.push(document.getElementById("a-" + i));
 	}
-	console.log(list_a);
 
 	let i = 0;
 	list_a.forEach(a => {
 		a.setAttribute("href", serverUrl + "/img_collection/" + timePeriodStr + "/" + i);
-		console.log(a.children);
 		let img;
 		for (const child of a.children) {
 			if (child.tagName == "IMG")
 				img = child;
 		}
-		console.log(img);
+		// console.log(img);
 		img.src = serverUrl + "/img_collection/" + timePeriodStr + "/" + i;
 		i++;
 	});
