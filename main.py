@@ -35,7 +35,7 @@ y_list = list()
 times = ["early_renaissance", "high_renaissance", "mannerism_late_renaissance", "northern_renaissance", "baroque",
          "ukiyo_e", "rococo", "realism", "impressionism", "romanticism", "symbolism", "pointillism",
          "art_nouveau_modern", "naive_art_primitivism", "post_impressionism", "fauvism", "cubism", "analytical_cubism",
-         "expressionism", "synthetic_cubism", "expressionism", "color_field_painting",
+         "expressionism", "synthetic_cubism", "color_field_painting",
          "abstract_expressionism", "action_painting", "pop_art", "contemporary_realism", "new_realism", "minimalism"]
 
 colors_by_time = ['#FFDAB9', '#FFE4C4', '#FFC0CB', '#DA70D6', '#8B0000', '#800080', '#FFA07A', '#87CEFA', '#3CB371',
