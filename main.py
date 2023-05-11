@@ -26,7 +26,7 @@ if not os.path.exists('yolov3.cfg'):
 debug('load')
 ds = deeplake.load('hub://activeloop/wiki-art')
 i = 0
-NUMBER_OF_INSTANCES = 20
+NUMBER_OF_INSTANCES = 10
 debug("randomlist")
 rand_list = random.sample(range(0, len(ds.images)), NUMBER_OF_INSTANCES)
 x_list = list()
@@ -86,7 +86,8 @@ for i in rand_list:
     print("")
 
     # line count
-    line_count = filters.get_lines_count(image)
+    lines_image, line_count = filters.get_lines_count(im_rgb)
+    cv2.imwrite(img_dir + "/image_" + str(i) + "_lines.png", lines_image)
     vector.append(line_count)
     img_tag["line_count"] = line_count
 
