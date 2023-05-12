@@ -26,7 +26,7 @@ if not os.path.exists('yolov3.cfg'):
 debug('load')
 ds = deeplake.load('hub://activeloop/wiki-art')
 i = 0
-NUMBER_OF_INSTANCES = 20
+NUMBER_OF_INSTANCES = 10
 debug("randomlist")
 rand_list = random.sample(range(0, len(ds.images)), NUMBER_OF_INSTANCES)
 x_list = list()
@@ -35,7 +35,7 @@ y_list = list()
 times = ["early_renaissance", "high_renaissance", "mannerism_late_renaissance", "northern_renaissance", "baroque",
          "ukiyo_e", "rococo", "realism", "impressionism", "romanticism", "symbolism", "pointillism",
          "art_nouveau_modern", "naive_art_primitivism", "post_impressionism", "fauvism", "cubism", "analytical_cubism",
-         "expressionism", "synthetic_cubism", "expressionism", "color_field_painting",
+         "expressionism", "synthetic_cubism", "color_field_painting",
          "abstract_expressionism", "action_painting", "pop_art", "contemporary_realism", "new_realism", "minimalism"]
 
 colors_by_time = ['#FFDAB9', '#FFE4C4', '#FFC0CB', '#DA70D6', '#8B0000', '#800080', '#FFA07A', '#87CEFA', '#3CB371',
@@ -86,7 +86,8 @@ for i in rand_list:
     print("")
 
     # line count
-    line_count = filters.get_lines_count(image)
+    lines_image, line_count = filters.get_lines_count(im_rgb)
+    cv2.imwrite(img_dir + "/image_" + str(i) + "_lines.png", lines_image)
     vector.append(line_count)
     img_tag["line_count"] = line_count
 
