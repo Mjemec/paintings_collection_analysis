@@ -31,17 +31,16 @@ function showImages(timePeriodStr) {
 
 	let i = 0;
 	list_a.forEach(a => {
-		a.setAttribute("href", serverUrl + "/img_collection/" + timePeriodStr + "/" + i);
+		a.setAttribute("href", serverUrl + "/img_collection/default/" + timePeriodStr + "/" + i);
 		let img;
 		for (const child of a.children) {
 			if (child.tagName == "IMG")
 				img = child;
 		}
 		// console.log(img);
-		img.src = serverUrl + "/img_collection/" + timePeriodStr + "/" + i;
+		img.src = serverUrl + "/img_collection/default/" + timePeriodStr + "/" + i;
 		i++;
 	});
 
 }
-
 
