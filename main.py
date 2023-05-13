@@ -92,7 +92,8 @@ for i in rand_list:
     img_tag["line_count"] = line_count
 
     # face count
-    face, face_count = filters.get_face_count(im_rgb)
+    face_image, face_count = filters.get_face_count(im_rgb)
+    cv2.imwrite(img_dir + "/image_" + str(i) + "_faces.png", face_image)
     vector.append(face_count)
     img_tag["face_count"] = face_count
 
