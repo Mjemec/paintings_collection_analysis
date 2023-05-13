@@ -4,7 +4,7 @@ file with filters that should return vector
 
 import torch
 from torchvision import transforms
-
+import cvlib as cv
 import poseEstimate
 
 import cv2
@@ -12,7 +12,7 @@ import numpy as np
 
 
 def get_face_count(im):
-    im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
+    # im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
 
     faces, confidences = cv.detect_face(im, 0.2)
     # loop through detected faces and add bounding box
