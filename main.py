@@ -102,7 +102,8 @@ for i in rand_list:
     img_tag["people_count"] = cnt
 
     # contour count
-    contour_count = filters.get_contour_count(image)
+    cont_img, contour_count = filters.get_contour_count(im_rgb)
+    cv2.imwrite(img_dir + "/image_" + str(i) + "_contour.png", cont_img)
     vector.append(contour_count)
     img_tag["contour_count"] = contour_count
 

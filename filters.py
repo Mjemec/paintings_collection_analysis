@@ -41,7 +41,11 @@ def get_histogram(image, flat=True):
 
 def detect_lines(image, threshold, min_line_length, max_line_gap):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    cv2.imwrite('gr.png',gray)
+    gray = cv2.blur(gray, (3, 3))
+    cv2.imwrite('blur.png', gray)
     edges = cv2.Canny(gray, 50, 150, apertureSize=3)
+    cv2.imwrite('edges.png', edges)
     lines = cv2.HoughLinesP(edges, 1, np.pi/180, threshold, minLineLength=min_line_length, maxLineGap=max_line_gap)
 
     if lines is None:
@@ -104,33 +108,35 @@ def non_max_suppression(lines, threshold, count=20):
 
 def get_lines_count(img):
     image = img.copy()
+    # Convert the image to grayscale
+    gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    gray = cv2.blur(gray, (7,7))
 
-    threshold = 100  # Minimum number of intersections to detect a line
-    min_line_length = 50  # Minimum length of the line to be detected
-    max_line_gap = 10  # Maximum allowed gap between line segments to be considered as a single line
-    nms_threshold = 0.5  # Overlap threshold for non-maximum suppression
+    # Perform edge detection
+    edges = cv2.Canny(gray, 100, 200)  # Adjust the thresholds as needed
 
-    detected_lines = detect_lines(image, threshold, min_line_length, max_line_gap)
-    filtered_lines = non_max_suppression(detected_lines, nms_threshold)
+    # Find contours
+    contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    for line in filtered_lines:
-        x1, y1, x2, y2, score = line
-        cv2.line(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
-        cv2.putText(image, f"Score: {score:.2f}", (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+    # Create an empty image with the same dimensions as the original image
+    colored_edges = np.zeros_like(image)
 
-    return image, len(filtered_lines)
+    # Assign a unique color to each contour/edge
+    for i, contour in enumerate(contours):
+        color = (np.random.randint(0, 256), np.random.randint(0, 256), np.random.randint(0, 256))
+        cv2.drawContours(colored_edges, [contour], 0, color, 2)
+
+    return colored_edges, len(contours)
 
 
 def get_contour_count(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    # Threshold the image
-    thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)[1]
-
-    # Find contours in the thresholded image
-    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-    return len(contours)
+    img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    ret, im = cv2.threshold(img_gray, 100, 255, cv2.THRESH_BINARY_INV)
+    contours, hierarchy = cv2.findContours(im, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    res_img = img.copy()
+    imgd = cv2.drawContours(res_img, contours, -1, (0, 255, 75), 2)
+    # see the results
+    return imgd, len(contours)
 
 
 def get_pose_mjeme(image):
