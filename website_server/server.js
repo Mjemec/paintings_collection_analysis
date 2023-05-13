@@ -29,12 +29,25 @@ app.get('/chart/faces', (req, res) => {
 });
 
 
-app.get("/img_collection/:time_period/:id", (req, res) => {
+app.get("/img_collection/:variant/:time_period/:id", (req, res) => {
 
+  let variant = req.params.variant;
+  console.log("variant: " + variant);
   let time_period = req.params.time_period;
-  console.log(time_period);
+  console.log("time period: " + time_period);
   let id = req.params.id;
-  console.log(id);
+  console.log("id: " + id);
+
+  let variant2path = {
+    "default": "",
+    "pose": "_pose",
+    "lines": "_lines",
+    "dim": "_dim"
+  };
+  let variantExtensions = Object.values(variant2path).filter(s => s != "");
+
+  variant = variant2path[variant];
+  console.log("variant2path: " + variant);
 
   res.setHeader('Content-Type', 'image/jpg');
   path = img_collection_dir + "/" + time_period;
@@ -45,19 +58,41 @@ app.get("/img_collection/:time_period/:id", (req, res) => {
     if (files == null)
       res.end();
     else {
+
+      // don't include _pose, _face etc.
+      // files = files.filter(file => variantExtensions.filter(ext => file.includes(ext)).length == 0);
+      files = files.filter(file => null != file.match(/image_[0-9]+\.[^_]+/g));
+
       files.sort();
-      fileName = files[id % files.length];
-      // dimensions = sizeOf(path + "/" + fileName);
-      // console.log(dimensions);
-      // console.log(fileName);
-      res.sendFile(fileName, { root: path });
+      let filePath = files[id % files.length];
+      let fileName = filePath.match(/.*\./g)[0];
+      if (fileName.charAt(fileName.length - 1) == ".")
+        fileName = fileName.substring(0, fileName.length - 1);
+      let fileExtension = "." + filePath.replace(/.*\./g, "");
+
+      // add variant
+      filePath = fileName + variant + fileExtension;
+
+      // console.log("filePath: " + filePath);
+      // console.log("fileName: " + fileName);
+      // console.log("fileExtension: " + fileExtension);
+      // console.log();
+
+      if (variant == "_dim") {
+        let dimensions = sizeOf(path + "/" + fileName + fileExtension);
+        // console.log(dimensions);
+        res.send(dimensions);
+      }
+      else {
+        res.sendFile(filePath, { root: path });
+      }
+
     }
 
-
   });
+  console.log();
 
 });
-
 
 // Start the server
 app.listen(3000, () => console.log('Server listening on port 3000'));

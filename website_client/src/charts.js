@@ -62,7 +62,7 @@ const id2time_peroid = [
                 const dataX = chart.scales.x.getValueForPixel(canvasPosition.x);
                 const dataY = chart.scales.y.getValueForPixel(canvasPosition.y);
                 // console.log(dataY);
-                console.log("Clicked column: " + dataY);
+                // console.log("Clicked column: " + dataY);
                 showImages(id2time_peroid[dataY]);
 
             }

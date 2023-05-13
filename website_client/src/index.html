@@ -13,21 +13,23 @@
 	/>
 
 	<!-- jquery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
 	<!-- local script -->
 	<script src="client.js"></script>
 	
+	<!-- charts script -->
     <script type="module" src="charts.js"></script>
 
-	<!-- Import jQuery and PhotoSwipe Scripts -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe-ui-default.min.js"></script>
+	<!-- Import PhotoSwipe Scripts -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
 	<!-- Import PhotoSwipe Styles -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/default-skin/default-skin.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.css">
 	
-	<title>Pain(tings) analysis</title>
+	<title>Paintings analysis</title>
 
 	<style>
 		.container {
@@ -67,9 +69,9 @@
 <body>
 
 	<div class="container">
-		<div class="row" style="max-height: 100vh;">
-			<h1 class="text-center py-4">X by time period</h1>
-			<div class="col-4" style="max-height: 90vh;">
+		<div class="row" style="height: 100vh;">
+			<h1 class="text-center py-4" style="max-height: 5vh;">X by time period</h1>
+			<div class="col-4" style="height: 90vh;">
 				<div style="width: 100%; height: 100%">
 					<canvas id="barChart"></canvas>
 				</div>
@@ -84,25 +86,25 @@
 						<div class="row">
 			
 							<div class="col-8">
-								<div class="row" style="height: 60vh;">
+								<div class="row" style="height: 60vh;" id="box-0">
 									<figure class="center" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-										<a href="http://localhost:3000/img_collection/baroque/0" id="a-0" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
-										  <img class="center" src="https://unsplash.it/400/300/?image=695" itemprop="thumbnail" alt="Image description">
+										<a id="a-0" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
+										  <img class="center" itemprop="thumbnail" alt="Image description">
 										</a>
 									</figure>
 								</div>
 								<div class="row" style="height: 30vh;">
-									<div class="col-6" style="height: 30vh;">
+									<div class="col-6" style="height: 30vh;" id="box-1">
 										<figure style="max-height: 30vh; width: 100%;" class="center" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-											<a href="https://unsplash.it/1200/900/?image=702" id="a-1" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
-											  <img class="center" src="https://unsplash.it/400/300/?image=702" itemprop="thumbnail" alt="Image description">
+											<a id="a-1" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
+											  <img class="center" itemprop="thumbnail" alt="Image description">
 											</a>
 										  </figure>
 									</div>
-									<div class="col-6" style="height: 30vh;">
+									<div class="col-6" style="height: 30vh;" id="box-2">
 										<figure style="max-height: 30vh; width: 100%;" class="center" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-											<a href="https://unsplash.it/1200/900/?image=695" id="a-2" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
-											  <img class="center" src="https://unsplash.it/400/300/?image=695" itemprop="thumbnail" alt="Image description">
+											<a id="a-2" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
+											  <img class="center" itemprop="thumbnail" alt="Image description">
 											</a>
 										  </figure>
 									</div>
@@ -111,28 +113,28 @@
 						
 							<div class="col-4" style="height: 90vh;">
 								<div class="row" style="height: 30vh;">
-									<div class="col mini-box">
+									<div class="col mini-box" id="box-3">
 										<figure class="center" style="max-height: 30vh; width: 100%;" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-											<a href="https://unsplash.it/1200/900/?image=702" id="a-3" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
-											  <img style="max-width: 20vw;" class="center" src="https://unsplash.it/400/300/?image=702" itemprop="thumbnail" alt="Image description">
+											<a id="a-3" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
+											  <img style="max-width: 20vw;" class="center" itemprop="thumbnail" alt="Image description">
 											</a>
 										  </figure>
 									</div>
 								</div>
 								<div class="row" style="height: 30vh;">
-									<div class="col mini-box">
+									<div class="col mini-box" id="box-4">
 										<figure class="center" style="max-height: 30vh; width: 100%;" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-											<a href="https://unsplash.it/1200/900/?image=702" id="a-4" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
-											  <img style="max-width: 20vw;" class="center" src="https://unsplash.it/400/300/?image=702" itemprop="thumbnail" alt="Image description">
+											<a id="a-4" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
+											  <img style="max-width: 20vw;" class="center" itemprop="thumbnail" alt="Image description">
 											</a>
 										  </figure>
 									</div>
 								</div>
 								<div class="row" style="height: 30vh;">
-									<div class="col mini-box">
+									<div class="col mini-box" id="box-5">
 										<figure class="center" style="max-height: 30vh; width: 100%;" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-											<a href="https://unsplash.it/1200/900/?image=702" id="a-5" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
-											  <img style="max-width: 20vw;" class="center" src="https://unsplash.it/400/300/?image=702" itemprop="thumbnail" alt="Image description">
+											<a id="a-5" data-caption="lorem ipsum" data-width="1200" data-height="900" itemprop="contentUrl">
+											  <img style="max-width: 20vw;" class="center" itemprop="thumbnail" alt="Image description">
 											</a>
 										  </figure>
 									</div>
@@ -200,67 +202,69 @@
 	<script>
 		'use strict';
 	
-		/* global jQuery, PhotoSwipe, PhotoSwipeUI_Default, console */
-	
 		(function($){
-	
-			// Init empty gallery array
-			var container = [];
-	
-			// Loop over gallery items and push it to the array
-			$('#gallery').find('figure').each(function(){
-			var $link = $(this).find('a'),
-				item = {
-					src: $link.attr('href'),
-					w: $link.data('width'),
-					h: $link.data('height'),
-					title: $link.data('caption')
-				};
-			container.push(item);
-			});
 	
 			// Define click event on gallery item
 			$('a').click(function(event){
 	
-			// Prevent location change
-			event.preventDefault();
-	
-			// Define object and gallery options
-			var $pswp = $('.pswp')[0],
-				options = {
-					index: $(this).parent('figure').index(),
-					bgOpacity: 0.85,
-					showHideOpacity: true
+				// Prevent location change
+				event.preventDefault();
+
+				// Init empty gallery array
+				let container = [];
+				let a_id = event.currentTarget.id;
+		
+				// Loop over gallery items and push it to the array
+				let imageVariants = ["", "_pose", "_lines"];
+				let variant2str = {
+					"": "Default",
+					"_pose": "Pose",
+					"_lines": "Lines"
 				};
-	
-			// Initialize PhotoSwipe
-			var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, container, options);
-			gallery.init();
+				let variant2path = {
+					"": "/img_collection/default",
+					"_pose": "/img_collection/pose",
+					"_lines": "/img_collection/lines"
+				}
+
+				let link = $("#" + a_id);
+				let imageSpecifier = link.attr('href').match(/\/[^/]+\/[0-9]+/g);
+				let promiseDim = $.getJSON(serverUrl + "/img_collection/dim" + imageSpecifier);
+
+				promiseDim.done(dimensions => {
+
+					imageVariants.forEach(imageVariant => {
+					
+						let imagePath = serverUrl + variant2path[imageVariant] + imageSpecifier;
+						
+						let item = {
+							src: imagePath,
+							w: dimensions['width'],
+							h: dimensions['height'],
+							title: variant2str[imageVariant]	// link.data('caption')
+						};
+						container.push(item);
+
+					});
+
+					// Define object and gallery options
+					var $pswp = $('.pswp')[0],
+						options = {
+							index: $(this).parent('figure').index(),
+							bgOpacity: 0.85,
+							showHideOpacity: true
+						};
+			
+					// Initialize PhotoSwipe
+					var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, container, options);
+					gallery.init();
+
+				});
+
 			});
-	
 		}(jQuery));
 	</script>
     
 </body>
-
-<!-- <body>	
-
-	<div class="container" style="max-width: 100%; max-height: 100%;">
-		<div class="row">
-			<h1 class="text-center py-4">X by time period</h1>
-			<div class="col-lg-4">
-				<h4 class="text-center">Bar chart</h4>
-				<div style="width: 100%; height: 96.9%">
-					<canvas id="barChart"></canvas>
-				</div>
-			</div>
-			<div class="col-lg-4" id="centerImage">
-			</div>
-			<div class="col-lg-4" id="quadImage">
-			</div>
-		</div>
-	</div>
-
-</body> -->
 
 </html>
