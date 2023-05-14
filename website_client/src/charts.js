@@ -55,6 +55,11 @@ export function initButtons() {
 }
 
 export function loadChart(chartStr) {
+
+  let bannerTitle = document.getElementById("banner-title");
+  if (bannerTitle)
+    bannerTitle.innerHTML = "Average number of " + chartStr + " by time period";
+
 	console.log("loading chart: " + chartStr);
 
 	let promise = $.get(serverUrl + "/chart/" + chartStr);
@@ -76,6 +81,11 @@ export function loadChart(chartStr) {
 				]
 			},
 			options: {
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
 				maintainAspectRatio: false,
 				indexAxis: 'y',
 				onClick: (e) => {
