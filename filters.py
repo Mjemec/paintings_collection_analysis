@@ -119,7 +119,7 @@ def get_lines_count(img):
     contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     # Create an empty image with the same dimensions as the original image
-    colored_edges = np.zeros_like(image)
+    colored_edges = image.copy()
 
     # Assign a unique color to each contour/edge
     for i, contour in enumerate(contours):
