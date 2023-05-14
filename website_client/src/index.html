@@ -220,16 +220,20 @@
 				let a_id = event.currentTarget.id;
 		
 				// Loop over gallery items and push it to the array
-				let imageVariants = ["", "_pose", "_lines"];
+				let imageVariants = ["", "_poses", "_lines", "_faces", "_contours"];
 				let variant2str = {
 					"": "Default",
-					"_pose": "Pose",
-					"_lines": "Lines"
+					"_poses": "Poses",
+					"_lines": "Lines",
+					"_faces": "Faces",
+					"_contours": "Contours"
 				};
 				let variant2path = {
 					"": "/img_collection/default",
-					"_pose": "/img_collection/pose",
-					"_lines": "/img_collection/lines"
+					"_poses": "/img_collection/poses",
+					"_lines": "/img_collection/lines",
+					"_faces": "/img_collection/faces",
+					"_contours": "/img_collection/contours"
 				}
 
 				let link = $("#" + a_id);

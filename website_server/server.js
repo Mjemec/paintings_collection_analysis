@@ -48,8 +48,10 @@ app.get("/img_collection/:variant/:time_period/:id", (req, res) => {
 
   let variant2path = {
     "default": "",
-    "pose": "_pose",
+    "poses": "_pose",
     "lines": "_lines",
+    "faces": "_faces",
+    "contours": "_contour",
     "dim": "_dim"
   };
   let variantExtensions = Object.values(variant2path).filter(s => s != "");
