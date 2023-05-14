@@ -54,7 +54,7 @@ if os.path.isdir(tag_dir):
 os.mkdir(tag_dir)
 
 
-images_per_period = 1
+images_per_period = 6
 
 if os.path.isdir("imgCollectionGenerated"):
     shutil.rmtree("imgCollectionGenerated")
