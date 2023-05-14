@@ -58,14 +58,15 @@ for time in times:
     by_group_all[time] = []
 
 
-def do_image(image, time_period, i):
+def do_image(image, time_period, img_dir, i):
     vector = []
     img_tag = {}
     hist = filters.get_histogram(image, False)
 
-    poses, cnt = filters.get_pose_mjeme(im_rgb)
-    cv2.imwrite(img_dir + "/image_" + str(i) + "_pose.png", poses)
-    cv2.imwrite(img_dir + "/image_" + str(i) + ".png", im_rgb)
+    poses, cnt = filters.get_pose_mjeme(image)
+    cv2.imwrite(img_dir + "/image_" + str(i) + "_pose.jpg", poses)
+    if not handpicked:
+        cv2.imwrite(img_dir + "/image_" + str(i) + ".jpg", image)
 
     # histogram
     for j in range(len(hist)):
@@ -79,14 +80,14 @@ def do_image(image, time_period, i):
     print("")
 
     # line count
-    lines_image, line_count = filters.get_lines_count(im_rgb)
-    cv2.imwrite(img_dir + "/image_" + str(i) + "_lines.png", lines_image)
+    lines_image, line_count = filters.get_lines_count(image)
+    cv2.imwrite(img_dir + "/image_" + str(i) + "_lines.jpg", image)
     vector.append(line_count)
     img_tag["line_count"] = line_count
 
     # face count
-    face_image, face_count = filters.get_face_count(im_rgb)
-    cv2.imwrite(img_dir + "/image_" + str(i) + "_faces.png", face_image)
+    face_image, face_count = filters.get_face_count(image)
+    cv2.imwrite(img_dir + "/image_" + str(i) + "_faces.jpg", face_image)
     vector.append(face_count)
     img_tag["face_count"] = face_count
 
@@ -95,8 +96,8 @@ def do_image(image, time_period, i):
     img_tag["people_count"] = cnt
 
     # contour count
-    cont_img, contour_count = filters.get_contour_count(im_rgb)
-    cv2.imwrite(img_dir + "/image_" + str(i) + "_contour.png", cont_img)
+    cont_img, contour_count = filters.get_contour_count(image)
+    cv2.imwrite(img_dir + "/image_" + str(i) + "_contour.jpg", cont_img)
     vector.append(contour_count)
     img_tag["contour_count"] = contour_count
 
@@ -121,10 +122,12 @@ if handpicked:
         if time_period.endswith('.sh'):
             continue
         for picture in os.listdir(os.path.join('imgCollection', time_period)):
-            i = os.path.splitext(picture)[0].split('_')[1]
-            image = cv2.imread(os.path.join('imgCollection', time_period, picture))
-            im_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            do_image(im_rgb, time_period, i)
+            if len(os.path.splitext(picture)[0].split('_')) == 2:
+                i = os.path.splitext(picture)[0].split('_')[1]
+                image = cv2.imread(os.path.join('imgCollection', time_period, picture))
+                im_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                img_path = os.path.join('imgCollection', time_period)
+                do_image(image, time_period, img_path, i)
 else:
     ds = deeplake.load('hub://activeloop/wiki-art')
     rand_list = random.sample(range(0, len(ds.images)), NUMBER_OF_INSTANCES)
