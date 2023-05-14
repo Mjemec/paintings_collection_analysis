@@ -10,18 +10,26 @@ app.use(cors({origin: "*"}));
 let byGroup = require('../by_group.json');
 let timePeriods = [...new Set(byGroup[0])];
 let byGroupValues = byGroup[1];
-const indexFaces = 7;
 
 const img_collection_dir = "../imgCollection";
 
-app.get('/chart/faces', (req, res) => {
+app.get('/chart/:filter', (req, res) => {
+
+  let filter = req.params.filter;
+  let filter2index = {
+    "lines": 6,
+    "faces": 7,
+    "poses": 8,
+    "contours": 9
+  }
+  let index = filter2index[filter];
 
   res.setHeader('Content-Type', 'application/json');
 
   let data = []
   timePeriods.forEach((timePeriod) => {
     if (byGroupValues[timePeriod] != null)
-      data.push({ time_period: timePeriod, value: byGroupValues[timePeriod][indexFaces] });
+      data.push({ time_period: timePeriod, value: byGroupValues[timePeriod][index] });
   });
 
   res.end(JSON.stringify(data));

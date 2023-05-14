@@ -8,6 +8,7 @@ const imgCount = 6;
 window.onload = () => {
 	
 	console.log("loaded");
+	window.initButtons();
 
 	// var promise = getData();
 	// promise.done((data, status) => {
@@ -15,10 +16,6 @@ window.onload = () => {
 	// 	console.log(data);
 	// });
 
-};
-
-function getFaceData() {
-	return $.get(serverUrl + "/chart/faces");
 };
 
 function showImages(timePeriodStr) {
