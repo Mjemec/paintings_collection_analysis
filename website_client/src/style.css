@@ -56,13 +56,13 @@ body {
     background-color: white;
 }
 
-button {
+.banner-btn {
     background-color: white;
     border: white;
     border-radius: 1.8rem;
 }
 
-button:hover {
+.banner-btn:hover {
     background-color: rgb(184, 184, 184);
     transition: all 0.7s;
     border-radius: 1.8rem;
