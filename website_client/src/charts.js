@@ -58,7 +58,7 @@ export function loadChart(chartStr) {
 
   let bannerTitle = document.getElementById("banner-title");
   if (bannerTitle)
-    bannerTitle.innerHTML = "Average number of " + chartStr + " by time period";
+    bannerTitle.innerHTML = "<b>Average</b> number of <b>" + chartStr + "</b> by time period";
 
 	console.log("loading chart: " + chartStr);
 
