@@ -79,6 +79,8 @@ app.get("/img_collection/:variant/:time_period/:id", (req, res) => {
       if (fileName.charAt(fileName.length - 1) == ".")
         fileName = fileName.substring(0, fileName.length - 1);
       let fileExtension = "." + filePath.replace(/.*\./g, "");
+      if (variant != "" && variant != "_dim")
+        fileExtension = ".jpg"
 
       // add variant
       filePath = fileName + variant + fileExtension;
