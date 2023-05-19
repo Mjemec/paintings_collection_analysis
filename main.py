@@ -81,7 +81,7 @@ def do_image(image, time_period, img_dir, i):
 
     # line count
     lines_image, line_count = filters.get_lines_count(image)
-    cv2.imwrite(img_dir + "/image_" + str(i) + "_lines.jpg", image)
+    cv2.imwrite(img_dir + "/image_" + str(i) + "_lines.jpg", lines_image)
     vector.append(line_count)
     img_tag["line_count"] = line_count
 
