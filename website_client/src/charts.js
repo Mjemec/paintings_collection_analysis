@@ -74,10 +74,10 @@ export function loadChart(chartStr) {
 				data: {
 					labels: data.map(row => snakeCase2properCase(row.time_period)),
 					datasets: [
-					{
-						label: "Average number of " + chartStr + " by time period",
-						data: data.map(row => row.value)
-					}
+						{
+							label: "Average number of " + chartStr + " by time period",
+							data: data.map(row => row.value)
+						}
 					]
 				},
 				options: {
@@ -98,7 +98,31 @@ export function loadChart(chartStr) {
 						// console.log("Clicked column: " + dataY);
 						showImages(id2time_peroid[dataY]);
 
-					}
+					},
+					scales: {
+						y: {
+						  grid: {
+							color: '#555555'
+						  },
+						  ticks: {
+							color: "#CCCCCC",
+							font: {
+								size: 14
+							}
+						  }
+						},
+						x: {
+						  grid: {
+							color: '#555555'
+						  },
+						  ticks: {
+							color: "#CCCCCC",
+							font: {
+								size: 14
+							}
+						  }
+						}
+					  }
 				}
 			}
 		);
