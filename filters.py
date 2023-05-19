@@ -11,7 +11,8 @@ import cv2
 import numpy as np
 
 
-def get_face_count(im):
+def get_face_count(img):
+    im = img.copy()
     # im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
 
     faces, confidences = cv.detect_face(im, 0.2)
@@ -110,10 +111,10 @@ def get_lines_count(img):
     image = img.copy()
     # Convert the image to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-    gray = cv2.blur(gray, (7,7))
+    gray = cv2.blur(gray, (7, 7))
 
     # Perform edge detection
-    edges = cv2.Canny(gray, 100, 200)  # Adjust the thresholds as needed
+    edges = cv2.Canny(gray, 70, 210)  # Adjust the thresholds as needed
 
     # Find contours
     contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
