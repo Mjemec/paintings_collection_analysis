@@ -83,3 +83,16 @@ body {
     border: 2px solid rgb(58, 58, 58);
     transition: 0.5s;
 }
+
+.image-variant {
+    font-size: 40;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+    background-color: white;
+    opacity: 0.5;
+    border-radius: 2rem;
+    padding: 3vh 3vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
