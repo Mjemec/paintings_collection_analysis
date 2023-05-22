@@ -139,7 +139,7 @@ else:
         label = ds.labels[i].data()
         time_period = label['text'][0]
         debug('filter')
-        do_image(im_rgb, time_period, i)
+        do_image(im_rgb, time_period, img_dir, i)
 
 do_json = False
 if do_json:
